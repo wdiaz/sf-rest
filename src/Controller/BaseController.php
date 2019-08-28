@@ -7,12 +7,12 @@ use App\Repository\UserRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\BattleRepository;
 use App\Repository\ApiTokenRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 
-abstract class BaseController extends Controller
+abstract class BaseController extends AbstractController
 {
     /**
      * Is the current user logged in?
@@ -40,10 +40,8 @@ abstract class BaseController extends Controller
     public function addFlash($message, $positiveNotice = true)
     {
         /** @var Request $request */
-        $request = $this->container->get('request_stack')->getCurrentRequest();
         $noticeKey = $positiveNotice ? 'notice_happy' : 'notice_sad';
-
-        $request->getSession()->getFlashbag()->add($noticeKey, $message);
+        $this->addFlash($noticeKey, $message);
     }
 
     /**

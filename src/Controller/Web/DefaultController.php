@@ -2,8 +2,7 @@
 
 namespace App\Controller\Web;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\BaseController;
 
 class DefaultController extends BaseController

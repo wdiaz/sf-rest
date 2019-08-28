@@ -5,8 +5,7 @@ namespace App\Controller\Web;
 use App\Entity\ApiToken;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\BaseController;
 
 class TokenController extends BaseController
@@ -14,8 +13,8 @@ class TokenController extends BaseController
     /**
      * Displays all of the user's tokens
      *
-     * @Route("/tokens", name="user_tokens")
-     * @Method("GET")
+     * @Route("/tokens", name="user_tokens", methods={"GET"})
+     *
      */
     public function indexAction()
     {
@@ -55,8 +54,8 @@ class TokenController extends BaseController
     }
 
     /**
-     * @Route("/tokens/{token}/delete", name="user_tokens_delete")
-     * @Method("POST")
+     * @Route("/tokens/{token}/delete", name="user_tokens_delete", methods={"POST"})
+     *
      */
     public function deleteAction($token)
     {

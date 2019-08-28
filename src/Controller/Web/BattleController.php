@@ -4,8 +4,7 @@ namespace App\Controller\Web;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Programmer;
 use App\Entity\Project;
 use App\Entity\Battle;
@@ -14,8 +13,7 @@ use App\Controller\BaseController;
 class BattleController extends BaseController
 {
     /**
-     * @Route("/battles/new", name="battle_new")
-     * @Method("POST")
+     * @Route("/battles/new", name="battle_new", methods={"POST"})
      */
     public function newAction(Request $request)
     {
@@ -36,8 +34,7 @@ class BattleController extends BaseController
     }
 
     /**
-     * @Route("/battles/{id}", name="battle_show")
-     * @Method("GET")
+     * @Route("/battles/{id}", name="battle_show", methods={"POST"})
      */
     public function showAction($id)
     {

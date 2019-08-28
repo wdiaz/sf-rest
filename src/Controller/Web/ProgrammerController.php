@@ -6,15 +6,13 @@ use App\Entity\Programmer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\BaseController;
 
 class ProgrammerController extends BaseController
 {
     /**
-     * @Route("/programmers/new", name="programmer_new")
-     * @Method("GET")
+     * @Route("/programmers/new", name="programmer_new", methods={"GET"})
      */
     public function newAction()
     {
@@ -24,8 +22,7 @@ class ProgrammerController extends BaseController
     }
 
     /**
-     * @Route("/programmers/new", name="programmer_new_handle")
-     * @Method("POST")
+     * @Route("/programmers/new", name="programmer_new_handle", methods={"POST"})
      */
     public function handleNewAction(Request $request)
     {
@@ -51,8 +48,7 @@ class ProgrammerController extends BaseController
     }
 
     /**
-     * @Route("/programmers/choose", name="programmer_choose")
-     * @Method("GET")
+     * @Route("/programmers/choose", name="programmer_choose", methods={"GET"})
      */
     public function chooseAction()
     {
@@ -62,8 +58,7 @@ class ProgrammerController extends BaseController
     }
 
     /**
-     * @Route("/programmers/{nickname}", name="programmer_show")
-     * @Method("GET")
+     * @Route("/programmers/{nickname}", name="programmer_show", methods={"GET"})
      */
     public function showAction($nickname)
     {
@@ -81,8 +76,7 @@ class ProgrammerController extends BaseController
     }
 
     /**
-     * @Route("/programmers/{nickname}/power/up", name="programmer_powerup")
-     * @Method("POST")
+     * @Route("/programmers/{nickname}/power/up", name="programmer_powerup", methods={"POST"})
      */
     public function powerUpAction($nickname)
     {

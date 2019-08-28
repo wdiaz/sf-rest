@@ -3,14 +3,16 @@
 namespace App\Twig;
 
 use App\Entity\Programmer;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-class BattleExtension extends \Twig_Extension
+class BattleExtension extends AbstractExtension
 {
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('powerLevelClass', array($this, 'getPowerLevelClass')),
-            new \Twig_SimpleFilter('avatar_path', array($this, 'getAvatarPath')),
+            new TwigFilter('powerLevelClass', array($this, 'getPowerLevelClass')),
+            new TwigFilter('avatar_path', array($this, 'getAvatarPath')),
         );
     }
 
@@ -38,6 +40,4 @@ class BattleExtension extends \Twig_Extension
     {
         return 'code_battle';
     }
-
-
 }
