@@ -49,12 +49,11 @@ class BattleController extends BaseController
     }
 
     /**
-     * @Route("/battles", name="battle_list")
+     * @Route("/battles", name="battle_list", methods={"GET"})
      */
     public function listAction()
     {
         $battles = $this->getBattleRepository()->findAll();
-
         return $this->render('battle/list.twig', array(
             'battles' => $battles,
         ));
