@@ -5,6 +5,7 @@ namespace App\Battle;
 use App\Entity\Programmer;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class PowerManager
 {
@@ -47,7 +48,7 @@ class PowerManager
         
     );
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }
@@ -60,6 +61,7 @@ class PowerManager
      */
     public function powerUp(Programmer $programmer)
     {
+
         // vary the power change between 3 and 7
         $powerChange = rand(3, 7);
         // have a 1/4 chance that the change will be negative (and then make the negatives smaller)
@@ -78,7 +80,6 @@ class PowerManager
 
             $message = sprintf(self::$negativeMessages[$key], $powerChange);
         }
-
         return array(
             'message' => $message,
             'powerChange' => $powerChange,

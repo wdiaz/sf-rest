@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\ApiToken;
+use App\Entity\Battle;
+use App\Entity\Programmer;
+use App\Entity\Project;
 use App\Repository\ProgrammerRepository;
 use App\Repository\UserRepository;
 use App\Repository\ProjectRepository;
@@ -37,7 +41,7 @@ abstract class BaseController extends AbstractController
         $this->container->get('security.token_storage')->setToken($token);
     }
 
-    public function addFlash($message, $positiveNotice = true)
+    public function addFlashMessage($message, $positiveNotice = true)
     {
         /** @var Request $request */
         $noticeKey = $positiveNotice ? 'notice_happy' : 'notice_sad';
@@ -61,7 +65,7 @@ abstract class BaseController extends AbstractController
     protected function getUserRepository()
     {
         return $this->getDoctrine()
-            ->getRepository('App:User');
+            ->getRepository(User::class);
     }
 
     /**
@@ -70,7 +74,7 @@ abstract class BaseController extends AbstractController
     protected function getProgrammerRepository()
     {
         return $this->getDoctrine()
-            ->getRepository('App:Programmer');
+            ->getRepository(Programmer::class);
     }
 
     /**
@@ -79,7 +83,7 @@ abstract class BaseController extends AbstractController
     protected function getProjectRepository()
     {
         return $this->getDoctrine()
-            ->getRepository('App:Project');
+            ->getRepository(Project::class);
     }
 
     /**
@@ -88,15 +92,7 @@ abstract class BaseController extends AbstractController
     protected function getBattleRepository()
     {
         return $this->getDoctrine()
-            ->getRepository('App:Battle');
-    }
-
-    /**
-     * @return \App\Battle\BattleManager
-     */
-    protected function getBattleManager()
-    {
-        return $this->container->get('battle.battle_manager');
+            ->getRepository(Battle::class);
     }
 
     /**
@@ -105,6 +101,6 @@ abstract class BaseController extends AbstractController
     protected function getApiTokenRepository()
     {
         return $this->getDoctrine()
-            ->getRepository('App:ApiToken');
+            ->getRepository(ApiToken::class);
     }
 }

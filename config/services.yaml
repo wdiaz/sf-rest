@@ -29,3 +29,11 @@ services:
         autowire: true
         tags:
           - { name: doctrine.event_subscriber }
+
+    App\Battle\BattleManager:
+        autowire: true
+        arguments: ['@doctrine.orm.entity_manager']
+
+    App\Battle\PowerManager:
+      autowire: true
+      arguments: ['@doctrine.orm.entity_manager']

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Web;
 
+use App\Battle\BattleManager;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,7 @@ class BattleController extends BaseController
     /**
      * @Route("/battles/new", name="battle_new", methods={"POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, BattleManager $getBattleManager)
     {
         $programmerId = $request->request->get('programmer_id');
         $projectId = $request->request->get('project_id');
@@ -28,13 +29,13 @@ class BattleController extends BaseController
             throw new AccessDeniedException();
         }
 
-        $battle = $this->getBattleManager()->battle($programmer, $project);
+        $battle = $getBattleManager->battle($programmer, $project);
 
         return $this->redirect($this->generateUrl('battle_show', array('id' => $battle->getId())));
     }
 
     /**
-     * @Route("/battles/{id}", name="battle_show", methods={"POST"})
+     * @Route("/battles/{id}", name="battle_show", methods={"GET"})
      */
     public function showAction($id)
     {
@@ -53,8 +54,9 @@ class BattleController extends BaseController
      */
     public function listAction()
     {
-        $battles = $this->getBattleRepository()->findAll();
-        return $this->render('battle/list.twig', array(
+
+    	$battles = $this->getBattleRepository()->findAll();
+		return $this->render('battle/list.twig', array(
             'battles' => $battles,
         ));
     }

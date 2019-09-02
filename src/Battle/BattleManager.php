@@ -7,9 +7,7 @@ use App\Entity\Programmer;
 use App\Entity\Project;
 use Doctrine\ORM\EntityManagerInterface;
 
-interface BattleManagerInterface{}
-
-class BattleManager implements BattleManagerInterface
+class BattleManager
 {
     private $em;
 

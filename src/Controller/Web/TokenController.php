@@ -40,7 +40,7 @@ class TokenController extends BaseController
             if (empty($errors)) {
                 $this->getApiTokenRepository()->save($token);
 
-                $this->addFlash('Yeehaw! You just created an API token');
+                $this->addFlashMessage('Yeehaw! You just created an API token');
                 $url = $this->generateUrl('user_tokens');
 
                 return $this->redirect($url);
@@ -73,7 +73,7 @@ class TokenController extends BaseController
         $em->remove($apiToken);
         $em->flush();
 
-        $this->addFlash('The token was shown the proverbial "door" (i.e. deleted).');
+        $this->addFlashMessage('The token was shown the proverbial "door" (i.e. deleted).');
         $url = $this->generateUrl('user_tokens');
 
         return $this->redirect($url);

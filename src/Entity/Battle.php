@@ -44,11 +44,12 @@ class Battle
      */
     private $notes;
 
-    /**
-     * Battle constructor.
-     * @param $programmer
-     * @param $project
-     */
+	/**
+	 * Battle constructor.
+	 * @param $programmer
+	 * @param $project
+	 * @throws \Exception
+	 */
     public function __construct(Programmer $programmer, Project $project)
     {
         $this->programmer = $programmer;

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Web;
 
+use App\Battle\PowerManager;
 use App\Entity\Programmer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -43,7 +44,7 @@ class ProgrammerController extends BaseController
         $em->persist($programmer);
         $em->flush();
 
-        $this->addFlash(sprintf('%s has been compiled and is ready for battle!', $programmer->getNickname()));
+        $this->addFlashMessage(sprintf('%s has been compiled and is ready for battle!', $programmer->getNickname()));
         return $this->redirect($this->generateUrl('programmer_show', array('nickname' => $programmer->getNickname())));
     }
 
@@ -75,21 +76,26 @@ class ProgrammerController extends BaseController
         ));
     }
 
-    /**
-     * @Route("/programmers/{nickname}/power/up", name="programmer_powerup", methods={"POST"})
-     */
-    public function powerUpAction($nickname)
+	/**
+	 * @Route("/programmers/{nickname}/power/up", name="programmer_powerup", methods={"POST"})
+	 * @param $nickname
+	 * @param PowerManager $powerManager
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 */
+    public function powerUpAction($nickname, PowerManager $powerManager)
     {
+
         /** @var Programmer $programmer */
         $programmer = $this->getProgrammerRepository()->findOneByNickname($nickname);
+
 
         if ($programmer->getUser() != $this->getUser()) {
             throw new AccessDeniedException;
         }
 
-        $powerupDetails = $this->container->get('battle.power_manager')->powerUp($programmer);
+        $powerupDetails = $powerManager->powerUp($programmer);
 
-        $this->addFlash(
+        $this->addFlashMessage(
             $powerupDetails['message'],
             $powerupDetails['powerChange'] > 0
         );
