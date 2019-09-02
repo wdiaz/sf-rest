@@ -3,10 +3,11 @@
 namespace App\Controller\Web;
 
 use App\Entity\User;
+use App\Form\LoginForm;
 use Symfony\Component\HttpFoundation\Request;
 use App\Controller\BaseController;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends BaseController
 {
@@ -19,7 +20,7 @@ class UserController extends BaseController
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('user/register.twig', array('user' => new User()));
+        return $this->render('register.html.twig', array('user' => new User()));
     }
 
     /**
@@ -60,7 +61,7 @@ class UserController extends BaseController
 
         // errors? Show them!
         if (count($errors) > 0) {
-            return $this->render('user\register.twig', array('errors' => $errors, 'user' => $user));
+            return $this->render('register.html.twig', array('errors' => $errors, 'user' => $user));
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -75,15 +76,21 @@ class UserController extends BaseController
     /**
      * @Route("/login", name="security_login_form")
      */
-    public function loginAction(Request $request)
+    public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
         if ($this->isUserLoggedIn()) {
             return $this->redirect($this->generateUrl('homepage'));
         }
+        $lastUsername = $authenticationUtils->getLastUserName();
+        $lastError = $authenticationUtils->getLastAuthenticationError();
 
-        return $this->render('user/login.twig', array(
-            'error'         => $this->container->get('security.authentication_utils')->getLastAuthenticationError(),
-            'last_username' => $this->container->get('security.authentication_utils')->getLastUserName()
+        $form = $this->createForm(LoginForm::class, [
+            '_username' => $lastUsername
+        ]);
+
+        return $this->render('user/login.html.twig', array(
+            'error'         => $lastError,
+            'form'          => $form->createView()
         ));
     }
 

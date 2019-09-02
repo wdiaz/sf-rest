@@ -41,6 +41,7 @@
                                data-toggle="dropdown" href="#">
                                 User Info <span class="caret"></span>
                             </a>
+                            {{ dump(app) }}
                             <ul class="dropdown-menu">
                                 <li>
                                     {% set user = app.security.token.user %}

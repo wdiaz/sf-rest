@@ -33,6 +33,8 @@ class User implements UserInterface
      */
     private $password;
 
+    private $plainPassword;
+
     public function getId()
     {
         return $this->id;
@@ -42,6 +44,7 @@ class User implements UserInterface
     {
         return $this->username;
     }
+
     public function setUsername($username)
     {
         $this->username = $username;
@@ -77,5 +80,25 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
+        $this->plainPassword= null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
+        // guarantees that the entity looks "dirty" to Doctrine
+        // when changing plan password
+        $this->password = null;
     }
 }
