@@ -5,24 +5,28 @@ namespace App\Battle;
 use App\Entity\Battle;
 use App\Entity\Programmer;
 use App\Entity\Project;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
-class BattleManager
+interface BattleManagerInterface{}
+
+class BattleManager implements BattleManagerInterface
 {
     private $em;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }
 
-    /**
-     * Creates and wages an epic battle
-     *
-     * @param Programmer $programmer
-     * @param Project $project
-     * @return Battle
-     */
+	/**
+	 * Creates and wages an epic battle
+	 *
+	 * @param Programmer $programmer
+	 * @param Project $project
+	 * @return Battle
+	 * @throws \Doctrine\ORM\ORMException
+	 * @throws \Doctrine\ORM\OptimisticLockException
+	 */
     public function battle(Programmer $programmer, Project $project)
     {
         $battle = new Battle($programmer, $project);
