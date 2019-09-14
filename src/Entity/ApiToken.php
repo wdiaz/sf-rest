@@ -42,7 +42,7 @@ class ApiToken
 
     public function __construct(User $user)
     {
-        $this->user = $user;;
+        $this->user = $user;
         $this->createdAt = new \DateTime();
         $this->token = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
@@ -78,9 +78,10 @@ class ApiToken
     }
 
     /**
-     * Sets the token - used in testing, should just be set automatically
+     * Sets the token - used in testing, should just be set automatically.
      *
      * @param string $token
+     *
      * @internal
      */
     public function setToken($token)

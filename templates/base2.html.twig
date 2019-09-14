@@ -22,11 +22,17 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a style="color: #fff;" class="nav-link" href="#">Local Asteroids</a>
+                <a style="color: #fff;" class="nav-link"  href="{{ path('programmer_new') }}">Create new Programmer</a>
             </li>
+
             <li class="nav-item">
-                <a style="color: #fff;" class="nav-link" href="#">Weather</a>
+                <a style="color: #fff;" class="nav-link" href="{{ path('battle_list') }}">Battles</a>
             </li>
+
+            <li class="nav-item">
+                <a style="color: #fff;" class="nav-link" href="{{ path('programmer_choose') }}">Start Battle</a>
+            </li>
+
             <li class="nav-item">
             {%  if is_granted('ROLE_USER') %}
                 <a style="color: #fff;" class="nav-link" href="{{ path('security_logout') }}">Logout</a>

@@ -2,4 +2,9 @@ App\Entity\User:
   user_{1..10}:
     username: '<username()>'
     email: '<email()>'
-    plainPassword: password
+    plainPassword: 'password'
+
+App\Entity\Movie:
+  movie_{1..20}:
+    title: '<sentence()>'
+    count: '<numberBetween(1,10)>'
