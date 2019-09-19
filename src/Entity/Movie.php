@@ -26,7 +26,20 @@ class Movie
      */
     private $count;
 
-    public function getId(): ?int
+	/**
+	 * @ORM\Column(type="datetime", name="created_at", nullable=false)
+	 */
+	private $createdAt;
+
+	/**
+	 * Movie constructor.
+	 */
+	public function __construct()
+	{
+		$this->createdAt = new \DateTime();
+	}
+
+	public function getId(): ?int
     {
         return $this->id;
     }
@@ -54,4 +67,20 @@ class Movie
 
         return $this;
     }
+
+	/**
+	 * @return mixed
+	 */
+	public function getCreatedAt()
+	{
+		return $this->createdAt;
+	}
+
+	/**
+	 * @param mixed $createdAt
+	 */
+	public function setCreatedAt($createdAt): void
+	{
+		$this->createdAt = $createdAt;
+	}
 }

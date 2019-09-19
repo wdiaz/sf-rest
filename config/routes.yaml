@@ -5,3 +5,11 @@
 #index:
 #    path: /
 #    controller: App\Controller\ArticleController::homepage
+
+#movie_index:
+#  path:       /movies/{page}
+#  controller: App\Controller\MovieApiController::index
+#  defaults:
+#    page: 1
+#  requirements:
+#    page: '\d+'

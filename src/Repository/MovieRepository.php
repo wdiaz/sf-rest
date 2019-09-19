@@ -3,8 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Movie;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * @method Movie|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,13 +11,8 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Movie[]    findAll()
  * @method Movie[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MovieRepository extends ServiceEntityRepository
+class MovieRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Movie::class);
-    }
-
     // /**
     //  * @return Movie[] Returns an array of Movie objects
     //  */
@@ -47,4 +41,29 @@ class MovieRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function transform(Movie $movie)
+    {
+        return [
+            'id' => (int) $movie->getId(),
+            'title' => (string) $movie->getTitle(),
+            'created_at' => $movie->getCreatedAt(),
+            'count' => (int) $movie->getCount(),
+        ];
+    }
+
+    public function transformAll()
+    {
+        $movies = $this->findAll();
+        $moviesArray = [];
+        foreach ($movies as $movie) {
+            $moviesArray[] = $this->transform($movie);
+        }
+
+        return $moviesArray;
+    }
+
+    public function findAllQueryBuilder()
+    {
+        return $this->createQueryBuilder('m');
+    }
 }

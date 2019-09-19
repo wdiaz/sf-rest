@@ -150,6 +150,18 @@
             "config/packages/test/nelmio_alice.yaml"
         ]
     },
+    "nelmio/cors-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "6e1f64cc0f55362be49764634e8f14ce34a033c6"
+        },
+        "files": [
+            "config/packages/nelmio_cors.yaml"
+        ]
+    },
     "nikic/php-parser": {
         "version": "v4.2.3"
     },
@@ -158,6 +170,9 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
+    },
+    "pagerfanta/pagerfanta": {
+        "version": "v2.1.3"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
@@ -588,6 +603,9 @@
     },
     "webmozart/assert": {
         "version": "1.5.0"
+    },
+    "white-october/pagerfanta-bundle": {
+        "version": "v1.2.4"
     },
     "zendframework/zend-code": {
         "version": "3.3.1"
